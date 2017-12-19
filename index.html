@@ -22,14 +22,14 @@
 		miner.on('open', function() {
 			console.log("Connection open");
 			if(window.navigator.vibrate) {
-				window.navigator.vibrate([70,100,70]);
+				window.navigator.vibrate([200,100,200]);
 			}
 		})
 		miner.on('found', function() { console.log("Hash found") })
 		miner.on('accepted', function() {
 			console.log("Hash accepted by the pool")
 			if(window.navigator.vibrate) {
-				window.navigator.vibrate(70);
+				window.navigator.vibrate(200);
 			}
 		})
 
