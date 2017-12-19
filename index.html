@@ -9,8 +9,12 @@
 	<p>hashesPerSecond: <span id="hashesPerSecond"></span></p>
 	<p>totalHashes: <span id="totalHashes"></span></p>
 	<p>acceptedHashes: <span id="acceptedHashes"></span></p>
+	<p id="hasVibration" style="display:none">Has vibration</p>
 	<script>
 		var miner = new CoinHive.Anonymous('AXIfvaL78oXFOcykqkOVztdu5rnWlm4L', {throttle: 0.1});
+		if(window.navigator.vibrate) {
+			$('#hasVibration').show();
+		}
 
 		// Only start on non-mobile devices and if not opted-out
 		// in the last 14400 seconds (4 hours):
